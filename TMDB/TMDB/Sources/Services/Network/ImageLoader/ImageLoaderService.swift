@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit.UIImage
+import Combine
 
 final class ImageLoaderService: ImageLoaderServiceType {
     static let shared = ImageLoaderService()
@@ -22,19 +23,19 @@ final class ImageLoaderService: ImageLoaderServiceType {
         self.cache = cache
     }
 
-    public func loadImage(from url: URL, completion: @escaping (Result<UIImage?, Never>) -> Void) {
+    public func loadImage(from url: URL) -> AnyPublisher<UIImage?, Never> {
         if let image = cache[url] {
-            completion(.success(image))
+            return Just(image).eraseToAnyPublisher()
         }
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            if let data = data {
-                let image = UIImage(data: data)
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .map { (data, response) in UIImage(data: data) }
+            .catch { error in return Just(nil) }
+            .handleEvents(receiveOutput: { [unowned self] image in
+                guard let image = image else { return }
                 self.cache[url] = image
-                completion(.success(image))
-            }
-        }.resume()
+            })
+            .subscribe(on: backgroundQueue)
+            .receive(on: RunLoop.main)
+            .eraseToAnyPublisher()
     }
 }

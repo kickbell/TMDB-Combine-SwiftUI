@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class SquareCell: UICollectionViewCell {
     // MARK: - Views
@@ -14,6 +15,10 @@ class SquareCell: UICollectionViewCell {
     private let name = UILabel()
     private let subtitle = UILabel()
     private var stackView = UIStackView()
+    
+    // MARK: Properties
+
+    private var cancellable: AnyCancellable?
     
     // MARK: - LifeCycle
     
@@ -31,6 +36,7 @@ class SquareCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         poster.image = nil
+        cancellable?.cancel()
     }
 
     // MARK: - Methods
@@ -72,17 +78,16 @@ class SquareCell: UICollectionViewCell {
     
     func configure(with movie: Movie) {
         name.text = movie.title
-        loadImage(from: movie.backdropPath)
+        cancellable = loadImage(from: movie.backdropPath).sink { [unowned self] image in poster.image = image }
     }
     
-    private func loadImage(from path: String?) {
-        guard let path = path,
-              let url = URL(string: ApiConstants.mediumImageUrl + path) else { return }
-        ImageLoaderService.shared.loadImage(from: url) { [weak self] result in
-            guard let image = try? result.get() else { return }
-            DispatchQueue.main.async {
-                self?.poster.image = image
-            }
-        }
+    private func loadImage(from path: String?) -> AnyPublisher<UIImage?, Never> {
+        return Just(path)
+            .compactMap { $0 }
+            .flatMap({ poster -> AnyPublisher<UIImage?, Never> in
+                let url = URL(string: ApiConstants.mediumImageUrl + poster)!
+                return ImageLoaderService.shared.loadImage(from: url)
+            })
+            .eraseToAnyPublisher()
     }
 }

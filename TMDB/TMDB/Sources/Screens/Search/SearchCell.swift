@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class SearchCell: UITableViewCell{
     
@@ -21,6 +22,7 @@ class SearchCell: UITableViewCell{
     // MARK: - Properties
     
     static let reuseIdentifler = String(describing: SearchCell.self)
+    private var cancellable: AnyCancellable?
     
     // MARK: - LifeCycle
     
@@ -38,6 +40,7 @@ class SearchCell: UITableViewCell{
     override func prepareForReuse() {
         super.prepareForReuse()
         poster.image = nil
+        cancellable?.cancel()
     }
     
     // MARK: - Methods
@@ -92,18 +95,17 @@ class SearchCell: UITableViewCell{
         tagline.text = movie.releaseDate
         title.text = movie.title
         overview.text = movie.overview
-        loadImage(from: movie.backdropPath)
+        cancellable = loadImage(from: movie.backdropPath).sink { [unowned self] image in poster.image = image }
     }
     
-    private func loadImage(from path: String?) {
-        guard let path = path,
-              let url = URL(string: ApiConstants.mediumImageUrl + path) else { return }
-        ImageLoaderService.shared.loadImage(from: url) { [weak self] result in
-            guard let image = try? result.get() else { return }
-            DispatchQueue.main.async {
-                self?.poster.image = image
-            }
-        }
+    private func loadImage(from path: String?) -> AnyPublisher<UIImage?, Never> {
+        return Just(path)
+            .compactMap { $0 }
+            .flatMap({ poster -> AnyPublisher<UIImage?, Never> in
+                let url = URL(string: ApiConstants.mediumImageUrl + poster)!
+                return ImageLoaderService.shared.loadImage(from: url)
+            })
+            .eraseToAnyPublisher()
     }
 
 }

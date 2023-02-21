@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class TrendMovieController: UITabBarController {
     
@@ -26,6 +27,10 @@ class TrendMovieController: UITabBarController {
     private let service: MoviesServiceType
     private var trending: [Movie] = []
     private var posterPath: String?
+    
+    // MARK: Properties
+
+    private var cancellable: AnyCancellable?
     
     // MARK: LifeCycle
     
@@ -136,18 +141,17 @@ class TrendMovieController: UITabBarController {
         info.text = "| ⭐️\(movie.voteAverage) | \(movie.releaseDate) |"
         overview.text = movie.overview
         posterPath = movie.posterPath
-        loadImage(from: movie.backdropPath)
+        cancellable = loadImage(from: movie.backdropPath).sink { [unowned self] image in poster.image = image }
     }
     
-    private func loadImage(from path: String?) {
-        guard let path = path,
-              let url = URL(string: ApiConstants.mediumImageUrl + path) else { return }
-        ImageLoaderService.shared.loadImage(from: url) { [weak self] result in
-            guard let image = try? result.get() else { return }
-            DispatchQueue.main.async {
-                self?.poster.image = image
-            }
-        }
+    private func loadImage(from path: String?) -> AnyPublisher<UIImage?, Never> {
+        return Just(path)
+            .compactMap { $0 }
+            .flatMap({ poster -> AnyPublisher<UIImage?, Never> in
+                let url = URL(string: ApiConstants.mediumImageUrl + poster)!
+                return ImageLoaderService.shared.loadImage(from: url)
+            })
+            .eraseToAnyPublisher()
     }
     
     @objc func open() {

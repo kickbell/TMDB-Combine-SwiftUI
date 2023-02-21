@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class FeaturedCell: UICollectionViewCell {
     
@@ -17,6 +18,10 @@ class FeaturedCell: UICollectionViewCell {
     private let subtitle = UILabel()
     private let poster = UIImageView()
     private var stackView = UIStackView()
+    
+    // MARK: Properties
+
+    private var cancellable: AnyCancellable?
     
     // MARK: - LifeCycle
     
@@ -34,6 +39,7 @@ class FeaturedCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         poster.image = nil
+        cancellable?.cancel()
     }
     
     // MARK: - Methods
@@ -88,18 +94,17 @@ class FeaturedCell: UICollectionViewCell {
         tagline.text = movie.releaseDate
         name.text = movie.title
         subtitle.text = movie.overview == "" ? "구매: \(movie.voteCount), 평점: \(movie.voteAverage)" : movie.overview
-        loadImage(from: movie.backdropPath)
+        cancellable = loadImage(from: movie.backdropPath).sink { [unowned self] image in poster.image = image }
     }
     
-    private func loadImage(from path: String?) {
-        guard let path = path,
-              let url = URL(string: ApiConstants.mediumImageUrl + path) else { return }
-        ImageLoaderService.shared.loadImage(from: url) { [weak self] result in
-            guard let image = try? result.get() else { return }
-            DispatchQueue.main.async {
-                self?.poster.image = image
-            }
-        }
+    private func loadImage(from path: String?) -> AnyPublisher<UIImage?, Never> {
+        return Just(path)
+            .compactMap { $0 }
+            .flatMap({ poster -> AnyPublisher<UIImage?, Never> in
+                let url = URL(string: ApiConstants.mediumImageUrl + poster)!
+                return ImageLoaderService.shared.loadImage(from: url)
+            })
+            .eraseToAnyPublisher()
     }
     
 }
