@@ -6,16 +6,17 @@
 //
 
 import Foundation
+import Combine
 
 protocol HTTPClient {
-    func sendRequest<T: Decodable>(endpoint: Endpoint, responseModel: T.Type) async -> Result<T, NetworkError>
+    func sendRequest<T: Decodable>(endpoint: Endpoint, responseModel: T.Type) -> AnyPublisher<T, NetworkError>
 }
 
 extension HTTPClient {
     func sendRequest<T: Decodable>(
         endpoint: Endpoint,
         responseModel: T.Type
-    ) async -> Result<T, NetworkError> {
+    ) -> AnyPublisher<T, NetworkError> {
         var urlComponents = URLComponents()
         urlComponents.scheme = endpoint.scheme
         urlComponents.host = endpoint.host
@@ -23,7 +24,7 @@ extension HTTPClient {
         urlComponents.queryItems = endpoint.queryItems
         
         guard let url = urlComponents.url else {
-            return .failure(.invalidURL)
+            return Fail(error: .invalidURL).eraseToAnyPublisher()
         }
         
         var request = URLRequest(url: url)
@@ -34,24 +35,21 @@ extension HTTPClient {
             request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
         }
         
-        do {
-            let (data, response) = try await URLSession.shared.data(for: request, delegate: nil)
-            guard let response = response as? HTTPURLResponse else {
-                return .failure(.noResponse)
-            }
-            switch response.statusCode {
-            case 200...299:
-                guard let decodedResponse = try? JSONDecoder().decode(responseModel, from: data) else {
-                    return .failure(.decode)
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .tryMap { (data, response) -> T in
+                guard let response = response as? HTTPURLResponse else {
+                    throw NetworkError.noResponse
                 }
-                return .success(decodedResponse)
-            case 401:
-                return .failure(.unauthorized)
-            default:
-                return .failure(.unexpectedStatusCode)
+                switch response.statusCode {
+                case 200...299:
+                    return try JSONDecoder().decode(responseModel, from: data)
+                case 401:
+                    throw NetworkError.unauthorized
+                default:
+                    throw NetworkError.unexpectedStatusCode
+                }
             }
-        } catch {
-            return .failure(.unknown)
-        }
+            .mapError { _ in NetworkError.unknown }
+            .eraseToAnyPublisher()
     }
 }

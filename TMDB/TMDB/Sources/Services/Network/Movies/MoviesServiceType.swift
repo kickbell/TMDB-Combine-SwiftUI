@@ -6,15 +6,16 @@
 //
 
 import Foundation
+import Combine
 
 protocol MoviesServiceType: AnyObject {
-    func popular() async -> Result<Movies, NetworkError>
-    func topRated() async -> Result<Movies, NetworkError>
-    func upcoming() async -> Result<Movies, NetworkError>
-    func genre() async -> Result<Genres, NetworkError>
-    func search(query: String, page: Int) async -> Result<Movies, NetworkError>
-    func detail(id: Int) async -> Result<MovieDetail, NetworkError>
-    func trending() async -> Result<Movies, NetworkError>
+    func popular() -> AnyPublisher<Movies, NetworkError>
+    func topRated() -> AnyPublisher<Movies, NetworkError>
+    func upcoming() -> AnyPublisher<Movies, NetworkError>
+    func genre() -> AnyPublisher<Genres, NetworkError>
+    func search(query: String, page: Int) -> AnyPublisher<Movies, NetworkError>
+    func detail(id: Int) -> AnyPublisher<MovieDetail, NetworkError>
+    func trending() -> AnyPublisher<Movies, NetworkError>
 }
 
 enum NetworkError: Error, CustomStringConvertible {
