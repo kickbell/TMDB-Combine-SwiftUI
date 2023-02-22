@@ -5,6 +5,7 @@
 //  Created by jc.kim on 2/18/23.
 //
 import UIKit
+import SwiftUI
 
 class SearchMovieController: UITableViewController, UISearchBarDelegate {
     
@@ -30,6 +31,9 @@ class SearchMovieController: UITableViewController, UISearchBarDelegate {
         fatalError("init(coder:) is not supported")
     }
     
+    @ObservedObject var viewModel: SearchViewModel = SearchViewModel(service: MoviesService())
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addAttributes()
@@ -38,10 +42,10 @@ class SearchMovieController: UITableViewController, UISearchBarDelegate {
     // MARK: Methods
     
     func fetch(query: String, page: Int, completion: @escaping (Result<Movies, NetworkError>) -> Void) {
-        Task(priority: .background) {
-            let result = await service.search(query: query, page: page)
-            completion(result)
-        }
+//        Task(priority: .background) {
+//            let result = await service.search(query: query, page: page)
+//            completion(result)
+//        }
     }
     
     func didScrollFetch() {

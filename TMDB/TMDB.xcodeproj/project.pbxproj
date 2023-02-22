@@ -44,6 +44,11 @@
 		A8146E9729A4B4FC0080D108 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8146E7529A4B4FB0080D108 /* HttpMethod.swift */; };
 		A8146E9829A4B4FC0080D108 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8146E7629A4B4FB0080D108 /* HttpClient.swift */; };
 		A8146E9929A4B4FC0080D108 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8146E7729A4B4FB0080D108 /* Endpoint.swift */; };
+		A8146E9B29A5C2510080D108 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8146E9A29A5C2510080D108 /* SearchViewModel.swift */; };
+		A8146E9D29A5C92C0080D108 /* TrendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8146E9C29A5C92C0080D108 /* TrendViewModel.swift */; };
+		A8146E9F29A5CC3A0080D108 /* TrendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8146E9E29A5CC3A0080D108 /* TrendView.swift */; };
+		A8146EA129A5CD220080D108 /* MovieResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8146EA029A5CD220080D108 /* MovieResultView.swift */; };
+		A8146EA329A5F6AA0080D108 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8146EA229A5F6AA0080D108 /* MainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +110,11 @@
 		A8146E7529A4B4FB0080D108 /* HttpMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
 		A8146E7629A4B4FB0080D108 /* HttpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
 		A8146E7729A4B4FB0080D108 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		A8146E9A29A5C2510080D108 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		A8146E9C29A5C92C0080D108 /* TrendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendViewModel.swift; sourceTree = "<group>"; };
+		A8146E9E29A5CC3A0080D108 /* TrendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendView.swift; sourceTree = "<group>"; };
+		A8146EA029A5CD220080D108 /* MovieResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieResultView.swift; sourceTree = "<group>"; };
+		A8146EA229A5F6AA0080D108 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +248,9 @@
 			isa = PBXGroup;
 			children = (
 				A8146E5429A4B4FB0080D108 /* TrendMovieController.swift */,
+				A8146E9C29A5C92C0080D108 /* TrendViewModel.swift */,
+				A8146E9E29A5CC3A0080D108 /* TrendView.swift */,
+				A8146EA029A5CD220080D108 /* MovieResultView.swift */,
 			);
 			path = Trend;
 			sourceTree = "<group>";
@@ -246,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				A8146E5629A4B4FB0080D108 /* MainTabBarController.swift */,
+				A8146EA229A5F6AA0080D108 /* MainView.swift */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -256,6 +270,7 @@
 				A8146E5829A4B4FB0080D108 /* SearchMovieController.swift */,
 				A8146E5929A4B4FB0080D108 /* SearchCell.swift */,
 				A8146E5A29A4B4FB0080D108 /* LoadingCell.swift */,
+				A8146E9A29A5C2510080D108 /* SearchViewModel.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -485,11 +500,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8146E9B29A5C2510080D108 /* SearchViewModel.swift in Sources */,
 				A8146E8E29A4B4FC0080D108 /* AppDelegate.swift in Sources */,
 				A8146E8529A4B4FC0080D108 /* SearchCell.swift in Sources */,
 				A8146E8129A4B4FC0080D108 /* Movies.swift in Sources */,
 				A8146E9729A4B4FC0080D108 /* HttpMethod.swift in Sources */,
 				A8146E9429A4B4FC0080D108 /* ImageLoaderServiceType.swift in Sources */,
+				A8146EA129A5CD220080D108 /* MovieResultView.swift in Sources */,
 				A8146E9329A4B4FC0080D108 /* ImageLoaderService.swift in Sources */,
 				A8146E7B29A4B4FC0080D108 /* Genres.swift in Sources */,
 				A8146E9129A4B4FC0080D108 /* ApiConstants.swift in Sources */,
@@ -507,6 +524,7 @@
 				A8146E7E29A4B4FC0080D108 /* Item.swift in Sources */,
 				A8146E9529A4B4FC0080D108 /* MoviesService.swift in Sources */,
 				A8146E8429A4B4FC0080D108 /* SearchMovieController.swift in Sources */,
+				A8146EA329A5F6AA0080D108 /* MainView.swift in Sources */,
 				A8146E8729A4B4FC0080D108 /* DetailMovieController.swift in Sources */,
 				A8146E7A29A4B4FC0080D108 /* UIViewController+Ext.swift in Sources */,
 				A8146E9629A4B4FC0080D108 /* MoviesServiceType.swift in Sources */,
@@ -514,6 +532,8 @@
 				A8146E8C29A4B4FC0080D108 /* SmallTableCell.swift in Sources */,
 				A8146E8829A4B4FC0080D108 /* MovieStoreController.swift in Sources */,
 				A8146E7D29A4B4FC0080D108 /* Genre.swift in Sources */,
+				A8146E9D29A5C92C0080D108 /* TrendViewModel.swift in Sources */,
+				A8146E9F29A5CC3A0080D108 /* TrendView.swift in Sources */,
 				A8146E9229A4B4FC0080D108 /* ImageCache.swift in Sources */,
 				A8146E9829A4B4FC0080D108 /* HttpClient.swift in Sources */,
 				A8146E9029A4B4FC0080D108 /* MoviesEndpoint.swift in Sources */,

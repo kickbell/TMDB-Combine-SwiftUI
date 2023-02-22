@@ -106,10 +106,10 @@ class DetailMovieController: UIViewController {
     }
     
     private func fetchData(completion: @escaping (Result<MovieDetail, NetworkError>) -> Void) {
-        Task(priority: .background) {
-            let result = await service.detail(id: self.id)
-            completion(result)
-        }
+//        Task(priority: .background) {
+//            let result = await service.detail(id: self.id)
+//            completion(result)
+//        }
     }
     
     func loadTableView(completion: (() -> Void)? = nil) {

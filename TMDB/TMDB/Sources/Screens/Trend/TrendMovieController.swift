@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import SwiftUI
 
 class TrendMovieController: UITabBarController {
     
@@ -43,12 +44,18 @@ class TrendMovieController: UITabBarController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @ObservedObject var viewModel: TrendViewModel = TrendViewModel(service: MoviesService())
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addAttributes()
         addSubviews()
         addConstraints()
         loadTableView()
+        
+        print(viewModel.trending(), "???1111")
+        print(viewModel.movies, "???1111")
     }
     
     // MARK: - Methods
@@ -116,10 +123,10 @@ class TrendMovieController: UITabBarController {
     }
     
     private func fetchData(completion: @escaping (Result<Movies, NetworkError>) -> Void) {
-        Task(priority: .background) {
-            let result = await service.trending()
-            completion(result)
-        }
+//        Task(priority: .background) {
+//            let result = await service.trending()
+//            completion(result)
+//        }
     }
     
     func loadTableView(completion: (() -> Void)? = nil) {

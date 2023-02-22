@@ -54,24 +54,24 @@ class MovieStoreController: UIViewController {
     }
     
     private func fetchData(completion: @escaping (FetchResult) -> Void) {
-        Task(priority: .background) {
-            let tapRated = await service.topRated()
-            let popular = await service.popular()
-            let genre = await service.genre()
-            let upcoming = await service.upcoming()
-            
-            do {
-                let t = try tapRated.get()
-                let p = try popular.get()
-                let g = try genre.get()
-                let u = try upcoming.get()
-            
-                let result = FetchResult(topRated: t, popular: p, genre: g, upcoming: u)
-                completion(result)
-            } catch {
-                showModal(title: "Error", message: error.localizedDescription)
-            }
-        }
+//        Task(priority: .background) {
+//            let tapRated = await service.topRated()
+//            let popular = await service.popular()
+//            let genre = await service.genre()
+//            let upcoming = await service.upcoming()
+//            
+//            do {
+//                let t = try tapRated.get()
+//                let p = try popular.get()
+//                let g = try genre.get()
+//                let u = try upcoming.get()
+//            
+//                let result = FetchResult(topRated: t, popular: p, genre: g, upcoming: u)
+//                completion(result)
+//            } catch {
+//                showModal(title: "Error", message: error.localizedDescription)
+//            }
+//        }
     }
     
     func loadTableView(completion: (() -> Void)? = nil) {

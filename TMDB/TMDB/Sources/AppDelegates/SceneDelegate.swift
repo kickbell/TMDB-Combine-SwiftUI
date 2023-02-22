@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -13,8 +14,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        let moviesService = MoviesService()
+        
+        let storeViewModel = SearchViewModel(service: moviesService)
+        let searchViewModel = SearchViewModel(service: moviesService)
+        let trendViewModel = TrendViewModel(service: moviesService)
+        
+        let mainView = MainView(storeViewModel: storeViewModel,
+                                searchViewModel: searchViewModel,
+                                trendViewModel: trendViewModel)
+        
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = MainTabBarController()
+        window?.rootViewController = UIHostingController(rootView: mainView)
         window?.makeKeyAndVisible()
     }
 
