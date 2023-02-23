@@ -49,6 +49,10 @@
 		A8146E9F29A5CC3A0080D108 /* TrendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8146E9E29A5CC3A0080D108 /* TrendView.swift */; };
 		A8146EA129A5CD220080D108 /* MovieResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8146EA029A5CD220080D108 /* MovieResultView.swift */; };
 		A8146EA329A5F6AA0080D108 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8146EA229A5F6AA0080D108 /* MainView.swift */; };
+		A8146EA529A60C1C0080D108 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8146EA429A60C1C0080D108 /* SearchBar.swift */; };
+		A8146EA729A60C2E0080D108 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8146EA629A60C2E0080D108 /* SearchView.swift */; };
+		A8146EA929A75ACA0080D108 /* SearchRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8146EA829A75ACA0080D108 /* SearchRow.swift */; };
+		A8146EAB29A768170080D108 /* JustifedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8146EAA29A768170080D108 /* JustifedText.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +119,10 @@
 		A8146E9E29A5CC3A0080D108 /* TrendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendView.swift; sourceTree = "<group>"; };
 		A8146EA029A5CD220080D108 /* MovieResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieResultView.swift; sourceTree = "<group>"; };
 		A8146EA229A5F6AA0080D108 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		A8146EA429A60C1C0080D108 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		A8146EA629A60C2E0080D108 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		A8146EA829A75ACA0080D108 /* SearchRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRow.swift; sourceTree = "<group>"; };
+		A8146EAA29A768170080D108 /* JustifedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustifedText.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,6 +279,10 @@
 				A8146E5929A4B4FB0080D108 /* SearchCell.swift */,
 				A8146E5A29A4B4FB0080D108 /* LoadingCell.swift */,
 				A8146E9A29A5C2510080D108 /* SearchViewModel.swift */,
+				A8146EA629A60C2E0080D108 /* SearchView.swift */,
+				A8146EA829A75ACA0080D108 /* SearchRow.swift */,
+				A8146EA429A60C1C0080D108 /* SearchBar.swift */,
+				A8146EAA29A768170080D108 /* JustifedText.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -515,6 +527,9 @@
 				A8146E8929A4B4FC0080D108 /* FeaturedCell.swift in Sources */,
 				A8146E7F29A4B4FC0080D108 /* MovieDetail.swift in Sources */,
 				A8146E9929A4B4FC0080D108 /* Endpoint.swift in Sources */,
+				A8146EA529A60C1C0080D108 /* SearchBar.swift in Sources */,
+				A8146EAB29A768170080D108 /* JustifedText.swift in Sources */,
+				A8146EA929A75ACA0080D108 /* SearchRow.swift in Sources */,
 				A8146E8229A4B4FC0080D108 /* TrendMovieController.swift in Sources */,
 				A8146E8329A4B4FC0080D108 /* MainTabBarController.swift in Sources */,
 				A8146E8029A4B4FC0080D108 /* Section.swift in Sources */,
@@ -533,6 +548,7 @@
 				A8146E8829A4B4FC0080D108 /* MovieStoreController.swift in Sources */,
 				A8146E7D29A4B4FC0080D108 /* Genre.swift in Sources */,
 				A8146E9D29A5C92C0080D108 /* TrendViewModel.swift in Sources */,
+				A8146EA729A60C2E0080D108 /* SearchView.swift in Sources */,
 				A8146E9F29A5CC3A0080D108 /* TrendView.swift in Sources */,
 				A8146E9229A4B4FC0080D108 /* ImageCache.swift in Sources */,
 				A8146E9829A4B4FC0080D108 /* HttpClient.swift in Sources */,

@@ -28,12 +28,12 @@ enum NetworkError: Error, CustomStringConvertible {
     
     var description: String {
         switch self {
-        case .decode: return ""
-        case .invalidURL: return ""
-        case .noResponse: return ""
-        case .unauthorized: return ""
-        case .unexpectedStatusCode: return ""
-        case .unknown: return ""
+        case .decode: return "디코딩 중에 오류가 발생했습니다."
+        case .invalidURL: return "유효하지 않은 URL입니다."
+        case .noResponse: return "응답이 없습니다."
+        case .unauthorized: return "접근 권한이 없습니다."
+        case .unexpectedStatusCode: return "예상하지 못한 상태코드입니다."
+        case .unknown: return "알 수 없는 오류입니다."
         }
     }
 }

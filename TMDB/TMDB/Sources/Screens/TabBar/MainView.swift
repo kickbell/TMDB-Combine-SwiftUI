@@ -27,17 +27,19 @@ struct MainView: View {
         TabView {
             TrendView(viewModel: trendViewModel)
                 .tabItem {
-                    Image(systemName: "cart")
+                    Image(systemName: "cart.fill")
                     Text("스토어")
                 }
-            TrendView(viewModel: trendViewModel)
+            
+            SearchView(viewModel: searchViewModel)
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                     Text("검색")
                 }
+            
             TrendView(viewModel: trendViewModel)
                 .tabItem {
-                    Image(systemName: "t.circle")
+                    Image(systemName: "t.circle.fill")
                     Text("트렌드")
                 }
         }

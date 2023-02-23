@@ -34,7 +34,6 @@ struct TrendView: View {
             }))
             .padding()
         }
-        
     }
 }
 
@@ -43,7 +42,6 @@ private extension TrendView {
         Text("최근 24시간 동안 트렌드 리스트의 영화를 랜덤으로 나타냅니다. 우측 버튼으로 새로고침 할 수 있습니다.")
             .font(.body)
             .foregroundColor(.secondary)
-        
     }
     
     func content() -> some View {
