@@ -34,7 +34,6 @@ class SearchViewModel: ObservableObject {
                 self.page = 1
             })
             .debounce(for: .seconds(0.5), scheduler: scheduler)
-            .print("hoho...")
             .sink(receiveValue: search(text:))
             .store(in: &cancellables)
     }
@@ -66,5 +65,4 @@ class SearchViewModel: ObservableObject {
             )
             .store(in: &cancellables)
     }
-    
 }

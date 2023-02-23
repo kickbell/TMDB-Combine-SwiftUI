@@ -22,16 +22,11 @@ struct SearchView: View {
             }
             .navigationBarTitle("검색")
         }
+        .navigationViewStyle(.stack)
         .alert(isPresented: $viewModel.showingAlert) {
-            Alert(title: Text("Error"),
-                  message: Text(viewModel.errorMessage))
+            Alert(title: Text("Error"), message: Text(viewModel.errorMessage))
         }
-        .onTapGesture {
-            UIApplication.shared.sendAction(
-                #selector(UIResponder.resignFirstResponder),
-                to:nil, from:nil, for:nil
-            )
-        }
+        .onTapGesture { resignFirstResponder() }
     }
 }
 
@@ -43,16 +38,23 @@ private extension SearchView {
     
     func content() -> some View {
         List(viewModel.movies, id: \.id) { movie in
-            SearchRow(movie: movie).onAppear {
-                if let lastId = viewModel.movies.last?.id, lastId == movie.id {
-                    viewModel.didScrollFetch()
+            NavigationLink(destination: MovieResultView(movie: movie)) {
+                SearchRow(movie: movie)
+                    .onAppear {
+                        if let lastId = viewModel.movies.last?.id,
+                            lastId == movie.id {
+                            viewModel.didScrollFetch()
+                        }
                 }
             }
         }.listStyle(.plain)
     }
     
-    func details(for movie: Movie) -> some View {
-        MovieResultView(movie: movie)
+    func resignFirstResponder() {
+        UIApplication.shared.sendAction(
+            #selector(UIResponder.resignFirstResponder),
+            to:nil, from:nil, for:nil
+        )
     }
 }
 

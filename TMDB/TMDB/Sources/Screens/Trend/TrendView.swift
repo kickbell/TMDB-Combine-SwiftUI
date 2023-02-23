@@ -34,6 +34,7 @@ struct TrendView: View {
             }))
             .padding()
         }
+        .navigationViewStyle(.stack)
     }
 }
 
