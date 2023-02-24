@@ -9,12 +9,12 @@ import SwiftUI
 import Combine
 
 struct MainView: View {
-    @ObservedObject var storeViewModel: SearchViewModel
+    @ObservedObject var storeViewModel: StoreViewModel
     @ObservedObject var searchViewModel: SearchViewModel
     @ObservedObject var trendViewModel: TrendViewModel
     
     init(
-        storeViewModel: SearchViewModel,
+        storeViewModel: StoreViewModel,
         searchViewModel: SearchViewModel,
         trendViewModel: TrendViewModel
     ) {
@@ -25,7 +25,7 @@ struct MainView: View {
     
     var body: some View {
         TabView {
-            StoreView(viewModel: searchViewModel)
+            StoreView(viewModel: storeViewModel)
                 .tabItem {
                     Image(systemName: "cart.fill")
                     Text("스토어")
@@ -50,7 +50,7 @@ struct MainView: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         let moviesService = MoviesService()
-        let storeViewModel = SearchViewModel(service: moviesService)
+        let storeViewModel = StoreViewModel(service: moviesService)
         let searchViewModel = SearchViewModel(service: moviesService)
         let trendViewModel = TrendViewModel(service: moviesService)
         

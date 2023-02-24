@@ -45,5 +45,4 @@ class TrendViewModel: ObservableObject {
             )
             .store(in: &cancellables)
     }
-    
 }

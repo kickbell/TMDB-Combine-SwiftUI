@@ -27,6 +27,8 @@ struct SquareRow: View {
             Text(movie.title)
                 .font(.subheadline)
                 .foregroundColor(.primary)
+                .multilineTextAlignment(.leading)
+                .frame(maxWidth: 170, alignment: .leading)
                 .lineLimit(1)
         }
     }

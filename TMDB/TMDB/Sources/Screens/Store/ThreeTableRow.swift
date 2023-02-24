@@ -21,6 +21,7 @@ struct ThreeTableRow: View {
             Image(uiImage: imageLoader.image ?? UIImage())
                 .resizable()
                 .background(.gray)
+                .aspectRatio(contentMode: .fill)
                 .cornerRadius(5)
                 .frame(width: 80, height: 80, alignment: .leading)
                 .clipped()
@@ -41,10 +42,3 @@ struct ThreeTableRow: View {
         .frame(width: 370, alignment: .leading)
     }
 }
-
-//struct ThreeTableRow_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let movie = Movie(backdropPath: nil, posterPath: nil, id: 1, overview: "overview", releaseDate: "releaseDate", title: "title", voteAverage: 0.0, voteCount: 1)
-//        ThreeTableRow(movie: movie)
-//    }
-//}

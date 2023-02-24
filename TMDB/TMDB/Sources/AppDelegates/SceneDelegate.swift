@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let moviesService = MoviesService()
         
-        let storeViewModel = SearchViewModel(service: moviesService)
+        let storeViewModel = StoreViewModel(service: moviesService)
         let searchViewModel = SearchViewModel(service: moviesService)
         let trendViewModel = TrendViewModel(service: moviesService)
         
