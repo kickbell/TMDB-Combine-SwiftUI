@@ -23,8 +23,10 @@ struct SearchRow: View {
                 Image(uiImage: imageLoader.image ?? UIImage())
                     .resizable()
                     .aspectRatio(1.0/1.0, contentMode: .fill)
+                    .background(.gray)
                     .cornerRadius(5)
                     .frame(width: 62, height: 62)
+                    .clipped()
                     
                 VStack(alignment: .leading) {
                     Text(movie.releaseDate)

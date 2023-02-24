@@ -25,7 +25,7 @@ struct MainView: View {
     
     var body: some View {
         TabView {
-            TrendView(viewModel: trendViewModel)
+            StoreView(viewModel: searchViewModel)
                 .tabItem {
                     Image(systemName: "cart.fill")
                     Text("스토어")
