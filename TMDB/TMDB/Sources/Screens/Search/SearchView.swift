@@ -38,13 +38,17 @@ private extension SearchView {
     
     func content() -> some View {
         List(viewModel.movies, id: \.id) { movie in
-            NavigationLink(destination: MovieResultView(movie: movie)) {
-                SearchRow(movie: movie)
-                    .onAppear {
-                        if let lastId = viewModel.movies.last?.id,
-                            lastId == movie.id {
-                            viewModel.didScrollFetch()
-                        }
+            ZStack(alignment: .leading) {
+                NavigationLink(destination: MovieResultView(movie: movie)) {
+                    EmptyView()
+                }
+                .opacity(0.0)
+                
+                SearchRow(movie: movie).onAppear {
+                    if let lastId = viewModel.movies.last?.id,
+                       lastId == movie.id {
+                        viewModel.didScrollFetch()
+                    }
                 }
             }
         }.listStyle(.plain)
