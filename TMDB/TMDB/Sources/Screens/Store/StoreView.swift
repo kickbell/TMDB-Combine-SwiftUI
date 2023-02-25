@@ -40,13 +40,18 @@ struct StoreView: View {
 
 private extension StoreView {
     func featured() -> some View {
+        
+        
+        
         VStack(alignment: .leading) {
             Divider()
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 10){
                     ForEach(viewModel.popularMovies, id: \.id) { movie in
-                        FeaturedView(movie: movie)
-                            .frame(width: UIScreen.main.bounds.width * 0.90)
+                        NavigationLink(destination: MovieResultView(movie: movie)) {
+                            FeaturedView(movie: movie)
+                                .frame(width: UIScreen.main.bounds.width * 0.90)
+                        }
                     }
                 }
             }

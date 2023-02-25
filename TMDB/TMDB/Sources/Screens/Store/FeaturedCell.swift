@@ -94,7 +94,7 @@ class FeaturedCell: UICollectionViewCell {
         tagline.text = movie.releaseDate
         name.text = movie.title
         subtitle.text = movie.overview == "" ? "구매: \(movie.voteCount), 평점: \(movie.voteAverage)" : movie.overview
-        cancellable = loadImage(from: movie.backdropPath).sink { [unowned self] image in poster.image = image }
+        cancellable = loadImage(from: movie.backdropPath).sink { [weak self] image in self?.poster.image = image }
     }
     
     private func loadImage(from path: String?) -> AnyPublisher<UIImage?, Never> {

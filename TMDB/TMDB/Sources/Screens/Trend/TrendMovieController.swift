@@ -148,7 +148,7 @@ class TrendMovieController: UITabBarController {
         info.text = "| ⭐️\(movie.voteAverage) | \(movie.releaseDate) |"
         overview.text = movie.overview
         posterPath = movie.posterPath
-        cancellable = loadImage(from: movie.backdropPath).sink { [unowned self] image in poster.image = image }
+        cancellable = loadImage(from: movie.backdropPath).sink { [weak self] image in self?.poster.image = image }
     }
     
     private func loadImage(from path: String?) -> AnyPublisher<UIImage?, Never> {

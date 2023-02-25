@@ -95,7 +95,7 @@ class SearchCell: UITableViewCell{
         tagline.text = movie.releaseDate
         title.text = movie.title
         overview.text = movie.overview
-        cancellable = loadImage(from: movie.backdropPath).sink { [unowned self] image in poster.image = image }
+        cancellable = loadImage(from: movie.backdropPath).sink { [weak self] image in self?.poster.image = image }
     }
     
     private func loadImage(from path: String?) -> AnyPublisher<UIImage?, Never> {

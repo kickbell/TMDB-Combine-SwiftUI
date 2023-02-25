@@ -88,7 +88,7 @@ class ThreeTableCell: UICollectionViewCell {
     func configure(with movie: Movie) {
         name.text = movie.title
         subtitle.text = movie.overview
-        cancellable = loadImage(from: movie.backdropPath).sink { [unowned self] image in poster.image = image }
+        cancellable = loadImage(from: movie.backdropPath).sink { [weak self] image in self?.poster.image = image }
     }
     
     private func loadImage(from path: String?) -> AnyPublisher<UIImage?, Never> {

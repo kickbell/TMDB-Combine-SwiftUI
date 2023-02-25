@@ -30,9 +30,9 @@ final class ImageLoaderService: ImageLoaderServiceType {
         return URLSession.shared.dataTaskPublisher(for: url)
             .map { (data, response) in UIImage(data: data) }
             .catch { error in return Just(nil) }
-            .handleEvents(receiveOutput: { [unowned self] image in
+            .handleEvents(receiveOutput: { [weak self] image in
                 guard let image = image else { return }
-                self.cache[url] = image
+                self?.cache[url] = image
             })
             .subscribe(on: backgroundQueue)
             .receive(on: RunLoop.main)

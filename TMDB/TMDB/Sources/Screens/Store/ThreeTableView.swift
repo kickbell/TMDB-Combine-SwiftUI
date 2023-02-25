@@ -30,7 +30,9 @@ struct ThreeTableView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHGrid(rows: examrows, spacing: 20) {
                 ForEach(items, id: \.id) { movie in
-                    ThreeTableRow(movie: movie)
+                    NavigationLink(destination: MovieResultView(movie: movie)) {
+                        ThreeTableRow(movie: movie)
+                    }
                 }
             }
         }

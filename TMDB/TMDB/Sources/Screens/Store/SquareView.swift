@@ -23,7 +23,9 @@ struct SquareView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHGrid(rows: rows, spacing: 20) {
                 ForEach(items, id: \.id) { movie in
-                    SquareRow(movie: movie)
+                    NavigationLink(destination: MovieResultView(movie: movie)) {
+                        SquareRow(movie: movie)
+                    }
                 }
             }
         }

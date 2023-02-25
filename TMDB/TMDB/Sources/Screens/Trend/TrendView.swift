@@ -21,7 +21,6 @@ struct TrendView: View {
                 content().onAppear {
                     self.viewModel.trending()
                 }
-                move()
                 Spacer()
             }
             .padding([.leading, .trailing], 5)
@@ -32,7 +31,6 @@ struct TrendView: View {
                 Image(systemName: "arrow.clockwise")
                     .tint(.blue)
             }))
-            .padding()
         }
         .navigationViewStyle(.stack)
     }
@@ -43,6 +41,7 @@ private extension TrendView {
         Text("최근 24시간 동안 트렌드 리스트의 영화를 랜덤으로 나타냅니다. 우측 버튼으로 새로고침 할 수 있습니다.")
             .font(.body)
             .foregroundColor(.secondary)
+            .padding([.leading, .trailing])
     }
     
     func content() -> some View {
@@ -50,19 +49,6 @@ private extension TrendView {
             return AnyView(Text(""))
         }
         return AnyView(MovieResultView(movie: movie))
-    }
-    
-    func move() -> some View {
-        Button(action: {
-            guard let movie = viewModel.movies?.first,
-                  let url = URL(string: ApiConstants.originalImageUrl + (movie.posterPath ?? "")) else { return }
-            UIApplication.shared.open(url)
-        }) {
-            Text("포스터 보러가기")
-                .frame(maxWidth: .infinity, maxHeight: 50)
-                .foregroundColor(.white)
-                .background(Color.blue)
-        }
     }
 }
 
