@@ -18,6 +18,7 @@ final class ImageLoader: ObservableObject {
     init(service: ImageLoaderServiceType, path: String) {
         self.service = service
         
+
         let url = URL(string: ApiConstants.mediumImageUrl + path)!
         cancellable = service.loadImage(from: url)
             .receive(on: DispatchQueue.main)
