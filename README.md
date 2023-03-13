@@ -1,4 +1,5 @@
 # TMDB-Combine-SwiftUI
+TMDB(The Movie Database) API 를 사용해서 같은 앱을 다른 방법으로 구현해보았습니다.
 
 ![](https://velog.velcdn.com/images/dev_kickbell/post/beeaa984-9528-496e-9970-f1d745d407d1/image.png)
 
